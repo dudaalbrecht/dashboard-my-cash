@@ -4,20 +4,19 @@ import BalanceCard from '../components/dashboard/BalanceCard'
 import IncomeCard from '../components/dashboard/IncomeCard'
 import ExpenseCard from '../components/dashboard/ExpenseCard'
 import DashboardHeader from '../components/dashboard/DashboardHeader'
-import CategoryCarousel from '../components/dashboard/CategoryCarousel'
+import CategoryGrid from '../components/dashboard/CategoryGrid'
 import FlowChart from '../components/dashboard/FlowChart'
-import CreditCardsWidget from '../components/dashboard/CreditCardsWidget'
-import NextExpensesWidget from '../components/dashboard/NextExpensesWidget'
+import DashboardRightSidebar from '../components/dashboard/DashboardRightSidebar'
 import TransactionsTable from '../components/dashboard/TransactionsTable'
 import NewTransactionModal from '../components/modals/NewTransactionModal'
 import AddCardModal from '../components/modals/AddCardModal'
 import CardDetailsModal from '../components/modals/CardDetailsModal'
 
 export default function Dashboard() {
-  const { 
-    calculateTotalBalance, 
-    calculateIncomeForPeriod, 
-    calculateExpensesForPeriod 
+  const {
+    calculateTotalBalance,
+    calculateIncomeForPeriod,
+    calculateExpensesForPeriod
   } = useFinance()
 
   const [showNewTransactionModal, setShowNewTransactionModal] = useState(false)
@@ -32,19 +31,19 @@ export default function Dashboard() {
   const previousBalance = balance * 0.9
 
   return (
-    <div className="w-full flex flex-col gap-6">
+    <div className="w-full h-full">
       {/* Page Title - Hidden visually but accessible */}
       <h1 className="sr-only">Dashboard</h1>
 
-      {/* Dashboard Header with filters */}
-      <DashboardHeader onNewTransaction={() => setShowNewTransactionModal(true)} />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Left Main Content */}
+        <div className="lg:col-span-8 flex flex-col gap-8">
 
-      {/* Top Section: Categories + Summary Cards + Credit Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left Column: Categories + Summary */}
-        <div className="lg:col-span-7 xl:col-span-8 flex flex-col gap-6">
-          {/* Category Carousel */}
-          <CategoryCarousel />
+          {/* Header */}
+          <DashboardHeader onNewTransaction={() => setShowNewTransactionModal(true)} />
+
+          {/* Categories Grid */}
+          <CategoryGrid />
 
           {/* Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -52,48 +51,47 @@ export default function Dashboard() {
             <IncomeCard value={income} />
             <ExpenseCard value={expenses} />
           </div>
+
+          {/* Flow Chart */}
+          <FlowChart />
+
         </div>
 
-        {/* Right Column: Credit Cards Widget */}
-        <div className="lg:col-span-5 xl:col-span-4">
-          <CreditCardsWidget 
+        {/* Right Sidebar */}
+        <div className="lg:col-span-4 sticky top-6">
+          <DashboardRightSidebar
             onAddCard={() => setShowAddCardModal(true)}
+            onAddExpense={() => setShowNewTransactionModal(true)}
             onCardClick={(id) => setSelectedCardId(id)}
           />
         </div>
       </div>
 
-      {/* Middle Section: Flow Chart + Next Expenses */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Flow Chart */}
-        <div className="lg:col-span-7 xl:col-span-8">
-          <FlowChart />
-        </div>
-
-        {/* Next Expenses */}
-        <div className="lg:col-span-5 xl:col-span-4">
-          <NextExpensesWidget onAddExpense={() => setShowNewTransactionModal(true)} />
-        </div>
+      {/* Bottom Section: Transactions Table (Optional, or moved? Design seemed to show transactions in sidebar or separate? 
+          Actually the design screenshot shows "Extrato detalhado" at the bottom.
+          Let's keep it at the bottom but inside the left column or separate?
+          The Figma screenshot shows "Extrato detalhado" taking full width at the bottom.
+          So let's keep it below the grid.
+      */}
+      <div className="mt-8">
+        <TransactionsTable compact />
       </div>
 
-      {/* Bottom Section: Transactions Table */}
-      <TransactionsTable compact />
-
       {/* Modals */}
-      <NewTransactionModal 
-        isOpen={showNewTransactionModal} 
-        onClose={() => setShowNewTransactionModal(false)} 
+      <NewTransactionModal
+        isOpen={showNewTransactionModal}
+        onClose={() => setShowNewTransactionModal(false)}
       />
-      
-      <AddCardModal 
-        isOpen={showAddCardModal} 
-        onClose={() => setShowAddCardModal(false)} 
+
+      <AddCardModal
+        isOpen={showAddCardModal}
+        onClose={() => setShowAddCardModal(false)}
       />
-      
-      <CardDetailsModal 
-        isOpen={!!selectedCardId} 
+
+      <CardDetailsModal
+        isOpen={!!selectedCardId}
         cardId={selectedCardId}
-        onClose={() => setSelectedCardId(null)} 
+        onClose={() => setSelectedCardId(null)}
       />
     </div>
   )
