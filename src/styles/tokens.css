@@ -1,0 +1,61 @@
+/* ============================================
+   mycash+ Design System Tokens
+   Fonte de verdade: Figma
+   ============================================ */
+
+:root {
+  /* ========== CORES NEUTRAS ========== */
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-300: #E5E7EB;
+  --color-neutral-400: #D1D5DB;
+  --color-neutral-500: #9CA3AF;
+  --color-neutral-1100: #080B12;
+
+  /* ========== CORES PRIMÁRIAS ========== */
+  --color-primary-500: #D7FF00;
+
+  /* ========== CORES SECUNDÁRIAS ========== */
+  --color-secondary-50: #E7E8EA;
+  --color-secondary-900: #060A11;
+
+  /* ========== CORES DE SUPERFÍCIE ========== */
+  --color-surface-500: #FFFFFF;
+
+  /* ========== CORES DE BACKGROUND ========== */
+  --color-background-400: #F5F6F8;
+
+  /* ========== CORES DE MARCA ========== */
+  --color-brand-700: #C4E703;
+
+  /* ========== CORES SEMÂNTICAS ========== */
+  --color-blue-600: #2A89EF;
+  --color-green-600: #15BE78;
+  --color-red-600: #E61E32;
+
+  /* ========== ESPAÇAMENTOS ========== */
+  --space-0: 0px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-56: 56px;
+
+  /* ========== SHAPES (Border Radius) ========== */
+  --shape-2: 2px;
+  --shape-20: 20px;
+  --shape-100: 100px;
+
+  /* ========== TAMANHOS ========== */
+  --size-72: 72px;
+
+  /* ========== SIDEBAR ========== */
+  --sidebar-width-expanded: 300px;
+  --sidebar-width-collapsed: 80px;
+
+  /* ========== TRANSIÇÕES ========== */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}

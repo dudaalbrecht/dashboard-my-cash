@@ -1,0 +1,228 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   mycash+ Global Styles
+   ============================================ */
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background-400);
+    color: var(--color-neutral-1100);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  /* Prevenir zoom no iOS ao focar inputs */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
+  /* Scrollbar customizada */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-neutral-300);
+    border-radius: var(--shape-100);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-neutral-500);
+    border-radius: var(--shape-100);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-neutral-1100);
+  }
+}
+
+@layer components {
+  /* Container fluido padrão */
+  .container-fluid {
+    width: 100%;
+    padding-left: var(--space-16);
+    padding-right: var(--space-16);
+  }
+
+  @media (min-width: 768px) {
+    .container-fluid {
+      padding-left: var(--space-24);
+      padding-right: var(--space-24);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container-fluid {
+      padding-left: var(--space-32);
+      padding-right: var(--space-32);
+    }
+  }
+
+  /* Card base */
+  .card {
+    background-color: var(--color-surface-500);
+    border: 1px solid var(--color-neutral-300);
+    border-radius: var(--shape-20);
+    padding: var(--space-24);
+  }
+
+  /* Button base */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    padding: var(--space-12) var(--space-16);
+    border-radius: var(--shape-100);
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+    outline: none;
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+
+  .btn-primary {
+    background-color: var(--color-neutral-1100);
+    color: var(--color-neutral-0);
+  }
+
+  .btn-primary:hover {
+    opacity: 0.9;
+  }
+
+  .btn-secondary {
+    background-color: var(--color-primary-500);
+    color: var(--color-neutral-1100);
+  }
+
+  .btn-secondary:hover {
+    background-color: var(--color-brand-700);
+  }
+
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--color-neutral-1100);
+    border: 1px solid var(--color-neutral-300);
+  }
+
+  .btn-ghost:hover {
+    background-color: var(--color-neutral-300);
+  }
+
+  /* Input base */
+  .input {
+    width: 100%;
+    padding: var(--space-12) var(--space-24);
+    border: 1px solid var(--color-neutral-500);
+    border-radius: var(--shape-100);
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-neutral-1100);
+    background-color: var(--color-neutral-0);
+    transition: border-color var(--transition-fast);
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--color-primary-500);
+  }
+
+  .input::placeholder {
+    color: var(--color-neutral-500);
+  }
+
+  /* Touch targets mínimos */
+  .touch-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@layer utilities {
+  /* Animação de fade-in */
+  .animate-fade-in {
+    animation: fadeIn var(--transition-normal) ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Animação de slide-up */
+  .animate-slide-up {
+    animation: slideUp var(--transition-normal) ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Animação de slide-down */
+  .animate-slide-down {
+    animation: slideDown var(--transition-normal) ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Respeitar preferência de movimento reduzido */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
